@@ -1,35 +1,44 @@
-﻿using System;
-using Autofac;
-using SPW;
-using SPW.Examples.Context;
-using SPW.Examples.DependencyInjection;
-
-namespace SPW.Examples
+﻿namespace SPW.Examples
 {
-    internal class Program
-    {
-        public static void Init()
-        {
-            DI.Initialize();
-        }
+	using System;
 
+	using global::Autofac;
 
-        private static void Main(string[] args)
-        {
-            Config.SiteUrl = "http://zvezd-pc187/";
-            Init();
-            using (var container = DI.Container.BeginLifetimeScope())
-            {
-                var service = container.Resolve<DynamicService>();
-                //service.CreateAndUpdateItem();
-                //var items = service.QueryItems();
-                var typedService = container.Resolve<TypedService>();
-                typedService.LinqGetItem();
-                //typedService.Run();
+	using SPW.Examples.DependencyInjection;
 
-                Console.WriteLine("End");
-                Console.ReadLine();
-            }
-        }
-    }
+	/// <summary>
+	/// Example of usage
+	/// </summary>
+	internal class Program
+	{
+		/// <summary>
+		/// Initializes this instance.
+		/// </summary>
+		public static void Init()
+		{
+			DI.Initialize();
+		}
+
+		/// <summary>
+		/// Defines the entry point of the application.
+		/// </summary>
+		/// <param name="args">The arguments.</param>
+		private static void Main(string[] args)
+		{
+			Init();
+			using (var container = DI.Container.BeginLifetimeScope())
+			{
+				var service = container.Resolve<DynamicService>();
+
+				// service.CreateAndUpdateItem();
+				// var items = service.QueryItems();
+				var typedService = container.Resolve<TypedService>();
+				typedService.LinqGetItem();
+
+				// typedService.Run();
+				Console.WriteLine("End");
+				Console.ReadLine();
+			}
+		}
+	}
 }
