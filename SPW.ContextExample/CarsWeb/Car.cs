@@ -5,7 +5,7 @@ namespace SPW.ContextExample.CarsWeb
 {
     public class Car : SwListItem
     {
-        [SwField(FieldName = "Produced")]
+        [SwField(InternalName = "Produced")]
         public DateTime? Produced { get; set; }
 
         [SwField]

@@ -2,7 +2,7 @@
 
 namespace SPW.Examples.DependencyInjection
 {
-    // ReSharper disable once InconsistentNaming
+	// ReSharper disable once InconsistentNaming
     public static class DI
     {
         private static readonly object Lock = new object();

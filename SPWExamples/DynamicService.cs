@@ -4,7 +4,7 @@ using NecroNet.SharePoint.CodeCaml;
 
 namespace SPW.Examples
 {
-    public class DynamicService
+	public class DynamicService
     {
         private readonly ISwContext _swContext;
 

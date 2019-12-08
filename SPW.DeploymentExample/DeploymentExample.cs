@@ -5,7 +5,7 @@ using SPW.Deployment.Library;
 
 namespace SPW.DeploymentExample
 {
-    internal class DeploymentExample
+	internal class DeploymentExample
     {
         private static IContainer _di;
 

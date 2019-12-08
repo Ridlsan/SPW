@@ -6,7 +6,7 @@ using SPW.Mocks.Utils;
 
 namespace SPW.Mocks
 {
-    public class SwDynamicMockList : SwMockListBase, ISwDynamicList
+    public class SwDynamicMockList : SwMockListBase, SwDynamicList
     {
         public SwDynamicMockList(string listName, DataTable listData,
             SwListTemplate template = SwListTemplate.List)

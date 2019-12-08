@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SPW
+﻿namespace SPW
 {
-    public class SwItemData : Dictionary<string, object>, ISwItemData
-    {
-        public int Id { get; internal set; }
-    }
+	using System.Collections.Generic;
 
-    public interface ISwItemData : IDictionary<string, object>
-    {
-        int Id { get; }
-    }
+	/// <summary>
+	///   Represents List Item Data in dynamic fashion
+	/// </summary>
+	/// <seealso>
+	///   <cref>Dictionary{string, object}</cref>
+	/// </seealso>
+	public class SwItemData : Dictionary<string, object>
+	{
+		/// <summary>
+		/// Id of the item
+		/// </summary>
+		public int Id { get; internal set; }
+	}
 }

@@ -3,7 +3,7 @@ using SPW.Deployment;
 
 namespace SPW
 {
-    public abstract class SwConcreteWeb : IDisposable
+	public abstract class SwConcreteWeb : IDisposable
     {
         protected readonly ISwContext _context;
         protected readonly Lazy<ISwWeb> _sWeb;

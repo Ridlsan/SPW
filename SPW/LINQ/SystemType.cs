@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SPW.CamlBuilder
+﻿namespace SPW.LINQ
 {
-    internal static class TypeSystem
+	using System;
+	using System.Collections.Generic;
+
+	internal static class TypeSystem
     {
         internal static Type GetElementType(Type seqType)
         {
@@ -23,16 +23,12 @@ namespace SPW.CamlBuilder
         private static Type FindIEnumerable(Type seqType)
         {
             if (seqType == null || seqType == typeof(string))
-
-
             {
                 return null;
             }
 
 
             if (seqType.IsArray)
-
-
             {
                 return typeof(IEnumerable<>).MakeGenericType(seqType.GetElementType());
             }
@@ -52,10 +48,7 @@ namespace SPW.CamlBuilder
                 }
             }
 
-
             Type[] ifaces = seqType.GetInterfaces();
-
-
             if (ifaces != null && ifaces.Length > 0)
             {
                 foreach (Type iface in ifaces)

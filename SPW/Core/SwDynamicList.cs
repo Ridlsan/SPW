@@ -1,63 +1,61 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.SharePoint;
-using SPW.CamlBuilder;
-using SPW.Utils;
-
-namespace SPW
+﻿namespace SPW
 {
-    internal class SwDynamicList : SwListBase, ISwDynamicList
-    {
-        public SwDynamicList(ISwWeb swWeb, string listName, SwListTemplate template = SwListTemplate.List)
-            : base(swWeb, listName, template)
-        {
-        }
+	using System.Collections.Generic;
+	using System.Linq;
 
-        public SwItemData Find(int sItemId, params string[] values)
-        {
-            return CommonUtils.ConvertSpItemToSwItem(SpList.Value.GetItemById(sItemId), values);
-        }
+	using Microsoft.SharePoint;
 
-        /// <inheritdoc />
-        public IEnumerable<SwItemData> GetItems(string query, string viewFields)
-        {
-            var spQuery = new SPQuery
-            {
-                Query = query,
-                ViewFields = viewFields,
-            };
+	using SPW.CamlBuilder;
+	using SPW.Extensions;
+	using SPW.Utils;
 
-            var items = SpList.Value.GetItems(spQuery);
-            var fieldRefs = $"<ViewFields>{viewFields}</ViewFields>".ParseXML<ViewFields>();
-            var fieldNames = fieldRefs.FieldRef.Select(i => i.Name);
-            return items.Cast<SPListItem>()
-                .Select(i => CommonUtils.ConvertSpItemToSwItem(i, fieldNames.ToArray()));
-        }
+	internal class SwDynamicList : SwListBase, ISwDynamicList
+	{
+		public SwDynamicList(ISwWeb swWeb, string listName, SwListTemplate template = SwListTemplate.List)
+			: base(swWeb, listName, template)
+		{
+		}
 
-        /// <inheritdoc />
-        public SwItemData Create(SwItemData sItem)
-        {
-            var spNewItem = SpList.Value.AddItem();
-            foreach (var fieldName in sItem.Keys)
-            {
-                spNewItem[fieldName] = sItem[fieldName];
-            }
+		/// <inheritdoc />
+		public SwItemData Create(SwItemData sItem)
+		{
+			var spNewItem = this.SpList.Value.AddItem();
+			foreach (var fieldName in sItem.Keys)
+			{
+				spNewItem[fieldName] = sItem[fieldName];
+			}
 
-            spNewItem.Update();
-            return CommonUtils.ConvertSpItemToSwItem(spNewItem, sItem.Keys.ToArray());
-        }
+			spNewItem.Update();
+			return CommonUtils.ConvertSpItemToSwItem(spNewItem, sItem.Keys.ToArray());
+		}
 
-        /// <inheritdoc />
-        public SwItemData Update(SwItemData sItem)
-        {
-            var spNewItem = SpList.Value.GetItemById(sItem.Id);
-            foreach (var fieldName in sItem.Keys)
-            {
-                spNewItem[fieldName] = sItem[fieldName];
-            }
+		public SwItemData Find(int sItemId, params string[] values)
+		{
+			return CommonUtils.ConvertSpItemToSwItem(this.SpList.Value.GetItemById(sItemId), values);
+		}
 
-            spNewItem.Update();
-            return CommonUtils.ConvertSpItemToSwItem(spNewItem, sItem.Keys.ToArray());
-        }
-    }
+		/// <inheritdoc />
+		public IEnumerable<SwItemData> GetItems(string query, string viewFields)
+		{
+			var spQuery = new SPQuery { Query = query, ViewFields = viewFields };
+
+			var items = this.SpList.Value.GetItems(spQuery);
+			var fieldRefs = $"<ViewFields>{viewFields}</ViewFields>".ParseXML<ViewFields>();
+			var fieldNames = fieldRefs.FieldRef.Select(i => i.Name);
+			return items.Cast<SPListItem>().Select(i => CommonUtils.ConvertSpItemToSwItem(i, fieldNames.ToArray()));
+		}
+
+		/// <inheritdoc />
+		public SwItemData Update(SwItemData sItem)
+		{
+			var spNewItem = this.SpList.Value.GetItemById(sItem.Id);
+			foreach (var fieldName in sItem.Keys)
+			{
+				spNewItem[fieldName] = sItem[fieldName];
+			}
+
+			spNewItem.Update();
+			return CommonUtils.ConvertSpItemToSwItem(spNewItem, sItem.Keys.ToArray());
+		}
+	}
 }

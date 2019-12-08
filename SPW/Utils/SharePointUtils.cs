@@ -1,50 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.SharePoint;
-using Microsoft.SharePoint.Utilities;
-
-namespace SPW.Utils
+﻿namespace SPW.Utils
 {
-    public static class SharePointUtils
-    {
-        public static Dictionary<SwListTemplate, SPListTemplateType> ListTemplateMatch =
-            new Dictionary<SwListTemplate, SPListTemplateType>
-            {
-                [SwListTemplate.Library] = SPListTemplateType.DocumentLibrary,
-                [SwListTemplate.List] = SPListTemplateType.GenericList,
-                [SwListTemplate.TaskList] = SPListTemplateType.Tasks
-            };
+	using System;
+	using System.Collections.Generic;
 
-        public static SPList SwGetList(this SPWeb spWeb, string listName, SwListTemplate listType)
-        {
-            if (spWeb == null)
-            {
-                throw new ArgumentNullException(nameof(spWeb));
-            }
+	using Microsoft.SharePoint;
+	using Microsoft.SharePoint.Utilities;
 
-
-            var template = ListTemplateMatch[listType];
-
-            if (template == SPListTemplateType.DataConnectionLibrary ||
-                template == SPListTemplateType.DocumentLibrary ||
-                template == SPListTemplateType.HomePageLibrary ||
-                template == SPListTemplateType.PictureLibrary ||
-                template == SPListTemplateType.WebPageLibrary)
-            {
-                var spLibrary =
-                    spWeb.GetList(
-                        SPUrlUtility.CombineUrl(spWeb.Url, "/") + listName + "/"
-                    );
-
-                return spLibrary;
-            }
-            else
-            {
-                var spList = spWeb.GetList(
-                    SPUrlUtility.CombineUrl(spWeb.Url, "/lists/") + listName + "/"
-                );
-                return spList;
-            }
-        }
-    }
+	/// <summary>
+	/// Utilities for SharePoint
+	/// </summary>
+	public static class SharePointUtils
+	{
+		/// <summary>
+		/// Match for templates in SharePoint and in SPW
+		/// </summary>
+		public static Dictionary<SwListTemplate, SPListTemplateType> ListTemplateMatch =>
+			new Dictionary<SwListTemplate, SPListTemplateType>
+				{
+					[SwListTemplate.Library] = SPListTemplateType.DocumentLibrary,
+					[SwListTemplate.List] = SPListTemplateType.GenericList,
+					[SwListTemplate.TaskList] = SPListTemplateType.Tasks
+				};
+	}
 }

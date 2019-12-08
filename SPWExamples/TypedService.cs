@@ -4,7 +4,7 @@ using SPW.Examples.Context;
 
 namespace SPW.Examples
 {
-    public class TypedService
+	public class TypedService
     {
         private readonly ISwContext _swContext;
 

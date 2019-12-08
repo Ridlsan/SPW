@@ -1,6 +1,6 @@
 ﻿namespace SPW.ContextExample.CarsWeb
 {
-    public class ProductionWeb : SwConcreteWeb
+	public class ProductionWeb : SwConcreteWeb
     {
         /// <inheritdoc />
         public ProductionWeb(ISwContext context)

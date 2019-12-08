@@ -21,7 +21,7 @@
 		{
 			var sList = this.SpList.Value;
 			var spItem = sList.AddItem();
-			var fields = PropertyUtils.GetProperties<T>();
+			var fields = ReflectionUtils.GetProperties<T>();
 			foreach (var field in fields)
 			{
 				spItem[field.Name] = field.GetValue(sItem);
@@ -59,7 +59,7 @@
 		{
 			var sList = this.SpList.Value;
 			var spItem = sList.GetItemById(sItem.ID);
-			var fields = PropertyUtils.GetProperties<T>();
+			var fields = ReflectionUtils.GetProperties<T>();
 			foreach (var field in fields)
 			{
 				spItem[field.Name] = field.GetValue(sItem);
@@ -72,7 +72,7 @@
 		private static T CreateItemFromSpItem(SPListItem spItem)
 		{
 			var sItem = Activator.CreateInstance<T>();
-			var fields = PropertyUtils.GetProperties<T>();
+			var fields = ReflectionUtils.GetProperties<T>();
 			foreach (var field in fields)
 			{
 				var value = FieldTypeMapper.Instance.ConvertValue(spItem[field.Name], field.PropertyType);

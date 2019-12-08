@@ -44,7 +44,7 @@ namespace SPW.LINQ
             internal Enumerator(IEnumerable<SPListItem> spItems)
             {
                 _spEnumerator = spItems.GetEnumerator();
-                _fields = PropertyUtils.GetProperties<T>();
+                _fields = ReflectionUtils.GetProperties<T>();
             }
 
             public T Current { get; private set; }

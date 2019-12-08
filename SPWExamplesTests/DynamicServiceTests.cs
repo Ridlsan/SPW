@@ -10,7 +10,7 @@ using static Xunit.Assert;
 
 namespace SPW.Examples.Tests
 {
-    public class DynamicServiceTests
+	public class DynamicServiceTests
     {
         public DynamicServiceTests()
         {

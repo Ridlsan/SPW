@@ -9,7 +9,7 @@ using static Xunit.Assert;
 
 namespace SPW.Examples.Tests
 {
-    public class TypedServiceTests
+	public class TypedServiceTests
     {
         public TypedServiceTests()
         {

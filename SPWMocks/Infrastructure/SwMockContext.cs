@@ -3,7 +3,7 @@ using SPW;
 
 namespace SPW.Mocks
 {
-    public class SwMockContext : ISwContext
+	public class SwMockContext : ISwContext
     {
         public Dictionary<string, SwMockWeb> Webs = new Dictionary<string, SwMockWeb>();
 

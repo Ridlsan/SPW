@@ -6,7 +6,7 @@ using SPW.Utils;
 
 namespace SPW.Mocks
 {
-    public class SwMockList<T> : SwMockListBase, ISwList<T> where T : SwListItem
+	public class SwMockList<T> : SwMockListBase, ISwList<T> where T : SwListItem
     {
         internal SwMockList(ISwWeb swWeb, DataTable listData, string listName,
             SwListTemplate template = SwListTemplate.List)
@@ -31,7 +31,7 @@ namespace SPW.Mocks
         public T Create(T sItem)
         {
             var newRow = ListData.NewRow();
-            var fields = PropertyUtils.GetProperties<T>();
+            var fields = ReflectionUtils.GetProperties<T>();
             foreach (var field in fields)
             {
                 newRow[field.Name] = field.GetValue(sItem);
@@ -48,7 +48,7 @@ namespace SPW.Mocks
         {
             var row = ListData.GetById(sItem.ID);
 
-            var fields = PropertyUtils.GetProperties<T>();
+            var fields = ReflectionUtils.GetProperties<T>();
             foreach (var field in fields)
             {
                 row[field.Name] = field.GetValue(sItem);
@@ -60,7 +60,7 @@ namespace SPW.Mocks
         private static T CreateItemFromDataRow(DataRow spItem)
         {
             var sItem = Activator.CreateInstance<T>();
-            var fields = PropertyUtils.GetProperties<T>();
+            var fields = ReflectionUtils.GetProperties<T>();
             foreach (var field in fields)
             {
                 var value = FieldTypeMapper.Instance.ConvertValue(spItem[field.Name], field.PropertyType);

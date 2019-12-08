@@ -3,7 +3,7 @@ using SPW;
 
 namespace SPW.Mocks
 {
-    public class SwMockWeb : ISwWeb
+	public class SwMockWeb : ISwWeb
     {
         private readonly DataSet _lists;
 
@@ -22,7 +22,7 @@ namespace SPW.Mocks
         public string ServerRelativeUrl { get; set; }
 
         /// <inheritdoc />
-        public ISwDynamicList GetList(string listName, SwListTemplate template = SwListTemplate.List)
+        public SwDynamicList GetList(string listName, SwListTemplate template = SwListTemplate.List)
         {
             return new SwDynamicMockList(listName, _lists.Tables[listName + "#" + template], template);
         }
