@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{01FB6403-5708-4D0B-BEBB-40D49549FF9A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SPW</RootNamespace>
+    <AssemblyName>SPW</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharePoint.15.0.0\lib\Microsoft.SharePoint\Microsoft.SharePoint.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CamlBuilder\FieldRef.cs" />
+    <Compile Include="Deployment\SwConcreteSite.cs" />
+    <Compile Include="Deployment\SwConcreteWeb.cs" />
+    <Compile Include="LINQ\Evaluator.cs" />
+    <Compile Include="LINQ\Query.cs" />
+    <Compile Include="LINQ\QueryProvider.cs" />
+    <Compile Include="CamlBuilder\TypeSystem.cs" />
+    <Compile Include="Extensions\ListItemExtension.cs" />
+    <Compile Include="Core\FieldTypeMapper.cs" />
+    <Compile Include="Core\ISwList.cs" />
+    <Compile Include="Core\ISwWeb.cs" />
+    <Compile Include="Core\SwContext.cs" />
+    <Compile Include="Core\SwDynamicList.cs" />
+    <Compile Include="Core\SwList.cs" />
+    <Compile Include="Core\SwListBase.cs" />
+    <Compile Include="CamlBuilder\ViewFields.cs" />
+    <Compile Include="Core\SwListTemplate.cs" />
+    <Compile Include="Core\SwFieldTemplate.cs" />
+    <Compile Include="Core\SwItemData.cs" />
+    <Compile Include="Core\SwListItem.cs" />
+    <Compile Include="Core\SwListItemAttributes\FieldAttribute.cs" />
+    <Compile Include="Core\SwWeb.cs" />
+    <Compile Include="Core\SystemType.cs" />
+    <Compile Include="IswDynamicList.cs" />
+    <Compile Include="LINQ\SwObjectCreator.cs" />
+    <Compile Include="LINQ\SwQueryProvider.cs" />
+    <Compile Include="LINQ\QueryTranslator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\CommonUtils.cs" />
+    <Compile Include="Utils\Config.cs" />
+    <Compile Include="Utils\PropertyUtils.cs" />
+    <Compile Include="Utils\SharePointUtils.cs" />
+    <Compile Include="Utils\WebSiteContext.cs" />
+    <Compile Include="Utils\XmlUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
