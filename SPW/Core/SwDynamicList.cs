@@ -9,8 +9,19 @@
 	using SPW.Extensions;
 	using SPW.Utils;
 
+	/// <summary>
+	/// Dynamic list implementation
+	/// </summary>
+	/// <seealso cref="SPW.SwListBase" />
+	/// <seealso cref="SPW.ISwDynamicList" />
 	internal class SwDynamicList : SwListBase, ISwDynamicList
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="SwDynamicList"/> class.
+		/// </summary>
+		/// <param name="swWeb">IswWeb</param>
+		/// <param name="listName">Name of the list (url part after "/lists/" or webUrl for libs)</param>
+		/// <param name="template">Template of the list</param>
 		public SwDynamicList(ISwWeb swWeb, string listName, SwListTemplate template = SwListTemplate.List)
 			: base(swWeb, listName, template)
 		{
@@ -38,7 +49,6 @@
 		public IEnumerable<SwItemData> GetItems(string query, string viewFields)
 		{
 			var spQuery = new SPQuery { Query = query, ViewFields = viewFields };
-
 			var items = this.SpList.Value.GetItems(spQuery);
 			var fieldRefs = $"<ViewFields>{viewFields}</ViewFields>".ParseXML<ViewFields>();
 			var fieldNames = fieldRefs.FieldRef.Select(i => i.Name);

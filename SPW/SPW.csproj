@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Autofac\Module.cs" />
     <Compile Include="CamlBuilder\FieldRef.cs" />
+    <Compile Include="CamlBuilder\SwQuery.cs" />
     <Compile Include="Contracts\ISwDynamicList.cs" />
     <Compile Include="Contracts\ISwContext.cs" />
     <Compile Include="Deployment\SwConcreteSite.cs" />
