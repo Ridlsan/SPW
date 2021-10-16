@@ -1,8 +1,7 @@
 ﻿namespace SPW.Utils
 {
-	using System;
-
 	using Microsoft.SharePoint;
+	using System;
 
 	/// <summary>
 	///   Provides with web and site initialization
@@ -10,27 +9,29 @@
 	/// <seealso cref="System.IDisposable" />
 	public class WebSiteContext : IDisposable
 	{
+
+
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WebSiteContext"/> class.
 		/// </summary>
 		/// <param name="webUrl">Full url for webSite or relative, than the root will be added from configProvider</param>
 		/// <param name="configProvider">The configuration provider.</param>
-		public WebSiteContext(string webUrl, ISwConfigProvider configProvider)
+		public WebSiteContext(string serverUrl, string webUrl, SPUserToken userToken = null)
 		{
 			var fullUrl = webUrl;
-			if (!webUrl.StartsWith(configProvider.SiteUrl, StringComparison.InvariantCulture))
+			if (!webUrl.StartsWith(serverUrl, StringComparison.InvariantCulture))
 			{
 				if (!webUrl.StartsWith("/"))
 				{
 					fullUrl = "/" + fullUrl;
 				}
 
-				fullUrl = configProvider.SiteUrl + fullUrl;
+				fullUrl = serverUrl + fullUrl;
 			}
 
-			this.Site = new SPSite(fullUrl);
+			this.Site = new SPSite(fullUrl, userToken);
 			this.Web = this.Site.OpenWeb();
-			this.Web.AllowUnsafeUpdates = true;
 		}
 
 		/// <summary>

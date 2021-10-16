@@ -1,10 +1,9 @@
-﻿namespace SPW.Examples
+﻿using Autofac;
+using SPW.Examples.DependencyInjection;
+using System;
+
+namespace SPW.Examples
 {
-	using System;
-
-	using global::Autofac;
-
-	using SPW.Examples.DependencyInjection;
 
 	/// <summary>
 	/// Example of usage
@@ -26,14 +25,13 @@
 		private static void Main(string[] args)
 		{
 			Init();
-			using (var container = DI.Container.BeginLifetimeScope())
+			using (var diContext = DI.Container.BeginLifetimeScope())
 			{
-				var service = container.Resolve<DynamicService>();
-
+				var service = diContext.Resolve<DynamicService>();
 				// service.CreateAndUpdateItem();
 				// var items = service.QueryItems();
-				var typedService = container.Resolve<TypedService>();
-				typedService.LinqGetItem();
+				//		var typedService = container.Resolve<TypedService>();
+				//	typedService.LinqGetItem();
 
 				// typedService.Run();
 				Console.WriteLine("End");

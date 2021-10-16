@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>spw.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,16 +32,20 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>spw.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharePoint.15.0.0\lib\Microsoft.SharePoint\Microsoft.SharePoint.dll</HintPath>
+    <Reference Include="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharePoint.dll.2016.SSOM.16.0.4327.1000\lib\Microsoft.SharePoint\Microsoft.SharePoint.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -52,8 +57,12 @@
     <Compile Include="CamlBuilder\SwQuery.cs" />
     <Compile Include="Contracts\ISwDynamicList.cs" />
     <Compile Include="Contracts\ISwContext.cs" />
+    <Compile Include="Contracts\ISwUser.cs" />
+    <Compile Include="Core\Sites\SwSitesContext.cs" />
+    <Compile Include="Core\SwWeb\UrlLoginTuple.cs" />
     <Compile Include="Deployment\SwConcreteSite.cs" />
     <Compile Include="Deployment\SwConcreteWeb.cs" />
+    <Compile Include="Extensions\SPUserExtensions.cs" />
     <Compile Include="Extensions\SPWebExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="LINQ\Evaluator.cs" />
@@ -62,7 +71,7 @@
     <Compile Include="Extensions\ListItemExtension.cs" />
     <Compile Include="Utils\FieldTypeMapper.cs" />
     <Compile Include="Contracts\ISwList.cs" />
-    <Compile Include="Contracts\ISwWeb.cs" />
+    <Compile Include="Core\SwWeb\ISwWeb.cs" />
     <Compile Include="Core\SwContext.cs" />
     <Compile Include="Core\SwDynamicList.cs" />
     <Compile Include="Core\SwList.cs" />
@@ -72,7 +81,7 @@
     <Compile Include="Core\SwItemData.cs" />
     <Compile Include="Core\SwListItem.cs" />
     <Compile Include="Core\SwListItemAttributes\FieldAttribute.cs" />
-    <Compile Include="Core\SwWeb.cs" />
+    <Compile Include="Core\SwWeb\SwWeb.cs" />
     <Compile Include="LINQ\SystemType.cs" />
     <Compile Include="LINQ\SwObjectCreator.cs" />
     <Compile Include="LINQ\SwQueryProvider.cs" />
@@ -87,8 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+    <None Include="spw.ruleset" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

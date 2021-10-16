@@ -1,11 +1,9 @@
 ﻿namespace SPW.Extensions
 {
-	using System;
-
 	using Microsoft.SharePoint;
 	using Microsoft.SharePoint.Utilities;
-
 	using SPW.Utils;
+	using System;
 
 	/// <summary>
 	///   Extensions for SPWeb class
@@ -30,10 +28,10 @@
 			var template = SharePointUtils.ListTemplateMatch[listType];
 
 			if (template == SPListTemplateType.DataConnectionLibrary
-			    || template == SPListTemplateType.DocumentLibrary
-			    || template == SPListTemplateType.HomePageLibrary
-			    || template == SPListTemplateType.PictureLibrary
-			    || template == SPListTemplateType.WebPageLibrary)
+					|| template == SPListTemplateType.DocumentLibrary
+					|| template == SPListTemplateType.HomePageLibrary
+					|| template == SPListTemplateType.PictureLibrary
+					|| template == SPListTemplateType.WebPageLibrary)
 			{
 				var spLibrary = spWeb.GetList(SPUrlUtility.CombineUrl(spWeb.Url, "/") + listName + "/");
 

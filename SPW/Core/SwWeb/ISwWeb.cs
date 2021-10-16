@@ -1,12 +1,10 @@
 ﻿namespace SPW
 {
-	using System;
-
 	/// <summary>
 	///   Wrapped instanced of SPWeb
 	/// </summary>
 	/// <seealso cref="System.IDisposable" />
-	public interface ISwWeb : IDisposable
+	public interface ISwWeb
 	{
 		/// <summary>
 		///   Server relative url
@@ -22,6 +20,11 @@
 		ISwDynamicList GetList(string listName, SwListTemplate template = SwListTemplate.List);
 
 		/// <summary>
+		///  Returns current user
+		/// </summary>
+		ISwUser CurrentUser { get; }
+
+		/// <summary>
 		///   Gets the strongly typed list
 		/// </summary>
 		/// <typeparam name="T">SwListItem</typeparam>
@@ -30,5 +33,7 @@
 		/// <returns>ISwList</returns>
 		ISwList<T> GetList<T>(string listName, SwListTemplate template = SwListTemplate.List)
 			where T : SwListItem;
+
+
 	}
 }

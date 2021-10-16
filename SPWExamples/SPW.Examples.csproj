@@ -35,8 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac">
+      <HintPath>..\..\Sharepoint\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharePoint.dll.2016.SSOM.16.0.4327.1000\lib\Microsoft.SharePoint\Microsoft.SharePoint.dll</HintPath>
     </Reference>
     <Reference Include="NecroNet.SharePoint.CodeCaml, Version=0.3.0.0, Culture=neutral, PublicKeyToken=33ddc5f89ec92b5f, processorArchitecture=MSIL">
       <HintPath>..\packages\CodeCamlFork.0.3.0.0\lib\NecroNet.SharePoint.CodeCaml.dll</HintPath>
@@ -64,6 +67,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SPW.ContextExample\SPW.ContextExample.csproj">
+      <Project>{526E0864-722A-450B-B8C3-795AD7B31621}</Project>
+      <Name>SPW.ContextExample</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPW\SPW.csproj">
       <Project>{01FB6403-5708-4D0B-BEBB-40D49549FF9A}</Project>
       <Name>SPW</Name>

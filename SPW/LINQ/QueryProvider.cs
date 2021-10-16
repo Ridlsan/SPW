@@ -5,46 +5,46 @@ using System.Reflection;
 
 namespace SPW.LINQ
 {
-    public abstract class QueryProvider : IQueryProvider
-    {
-        IQueryable<S> IQueryProvider.CreateQuery<S>(Expression expression)
-        {
-            return new Query<S>(this, expression);
-        }
+	public abstract class QueryProvider : IQueryProvider
+	{
+		IQueryable<S> IQueryProvider.CreateQuery<S>(Expression expression)
+		{
+			return new Query<S>(this, expression);
+		}
 
-        IQueryable IQueryProvider.CreateQuery(Expression expression)
-        {
-            Type elementType = TypeSystem.GetElementType(expression.Type);
+		IQueryable IQueryProvider.CreateQuery(Expression expression)
+		{
+			Type elementType = TypeSystem.GetElementType(expression.Type);
 
-            try
-            {
-                return (IQueryable) Activator.CreateInstance(
-                    typeof(Query<>).MakeGenericType(elementType),
-                    this,
-                    expression
-                );
-            }
-
-
-            catch (TargetInvocationException tie)
-            {
-                throw tie.InnerException;
-            }
-        }
+			try
+			{
+				return (IQueryable)Activator.CreateInstance(
+						typeof(Query<>).MakeGenericType(elementType),
+						this,
+						expression
+				);
+			}
 
 
-        S IQueryProvider.Execute<S>(Expression expression)
-        {
-            return (S) Execute(expression);
-        }
+			catch (TargetInvocationException tie)
+			{
+				throw tie.InnerException;
+			}
+		}
 
 
-        object IQueryProvider.Execute(Expression expression)
-        {
-            return Execute(expression);
-        }
+		S IQueryProvider.Execute<S>(Expression expression)
+		{
+			return (S)Execute(expression);
+		}
 
 
-        public abstract object Execute(Expression expression);
-    }
+		object IQueryProvider.Execute(Expression expression)
+		{
+			return Execute(expression);
+		}
+
+
+		public abstract object Execute(Expression expression);
+	}
 }

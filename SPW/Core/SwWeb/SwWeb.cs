@@ -1,11 +1,10 @@
 ﻿namespace SPW
 {
+	using Microsoft.SharePoint;
+	using SPW.Extensions;
+	using SPW.Utils;
 	using System;
 	using System.Collections.Generic;
-
-	using Microsoft.SharePoint;
-
-	using SPW.Extensions;
 
 	/// <summary>
 	///   Initiates SwWeb
@@ -16,37 +15,31 @@
 		/// <summary>
 		///   SharePoint Web Instance
 		/// </summary>
-		internal readonly SPWeb SpWeb;
+		internal readonly WebSiteContext _webContext;
 
 		/// <summary>
 		///   Cached lists on web
 		/// </summary>
-		private readonly Dictionary<Tuple<string, SwListTemplate>, SPList> _lists =
-			new Dictionary<Tuple<string, SwListTemplate>, SPList>();
+		private readonly Dictionary<(string listName, SPListTemplateType template), SPList> _lists =
+			new Dictionary<(string listName, SPListTemplateType template), SPList>();
+
+		private readonly ISwContext _context;
 
 		/// <summary>
 		///   Initializes a new instance of the <see cref="SwWeb" /> class.
 		/// </summary>
 		/// <param name="sWeb">SharePoint Web</param>
-		internal SwWeb(SPWeb sWeb)
+		internal SwWeb(ISwContext context, string url, string login)
 		{
-			this.SpWeb = sWeb;
-			this.ServerRelativeUrl = sWeb.ServerRelativeUrl;
+			this._context = context;
 		}
 
 		/// <summary>
 		///   Server relative url
 		/// </summary>
-		public string ServerRelativeUrl { get; }
+		public string ServerRelativeUrl => _webContext.Web.ServerRelativeUrl;
 
-		/// <summary>
-		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-		/// </summary>
-		public void Dispose()
-		{
-			this.Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+		public ISwUser CurrentUser => throw new NotImplementedException();
 
 		/// <inheritdoc />
 		public ISwDynamicList GetList(string listName, SwListTemplate template)
@@ -67,29 +60,26 @@
 		/// <param name="listName">Name of the list.</param>
 		/// <param name="listType">Type of the list.</param>
 		/// <returns></returns>
-		internal SPList _getList(string listName, SwListTemplate listType)
+		internal SPList GetSPList(string listName, SwListTemplate listType)
 		{
 			var key = new Tuple<string, SwListTemplate>(listName, listType);
 			if (!this._lists.ContainsKey(key))
 			{
-				this._lists.Add(key, this.SpWeb.SwGetList(listName, listType));
+				this._lists.Add(key, this._webContext.Web.SwGetList(listName, listType));
 			}
 
 			return this._lists[key];
 		}
 
+
+
 		/// <summary>
-		///   Releases unmanaged and - optionally - managed resources.
+		///		WebSiteContext
 		/// </summary>
-		/// <param name="disposing">
-		///   <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
-		///   unmanaged resources.
-		/// </param>
-		protected virtual void Dispose(bool disposing)
+		private class WebSiteIndex
 		{
-			if (disposing)
-			{
-			}
+
 		}
+
 	}
 }

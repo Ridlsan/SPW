@@ -1,5 +1,6 @@
 ﻿namespace SPW
 {
+	using Microsoft.SharePoint;
 	using System.Collections.Generic;
 
 	/// <summary>
@@ -11,8 +12,18 @@
 	public class SwItemData : Dictionary<string, object>
 	{
 		/// <summary>
-		/// Id of the item
+		///  Item from SP
 		/// </summary>
-		public int Id { get; internal set; }
+		internal SPListItem SpItem { get; set; }
+
+		/// <summary>
+		///		Id of the item
+		/// </summary>
+		public int Id { get; private set; }
+
+		/// <summary>
+		///		Title of the item
+		/// </summary>
+		public string Title { get; private set; }
 	}
 }

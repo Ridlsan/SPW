@@ -1,37 +1,36 @@
 ﻿using System.Data;
-using SPW;
 
 namespace SPW.Mocks
 {
 	public class SwMockWeb : ISwWeb
-    {
-        private readonly DataSet _lists;
+	{
+		private readonly DataSet _lists;
 
-        public SwMockWeb(string url, DataSet listsData)
-        {
-            _lists = listsData;
-            ServerRelativeUrl = url;
-        }
+		public SwMockWeb(string url, DataSet listsData)
+		{
+			_lists = listsData;
+			ServerRelativeUrl = url;
+		}
 
-        /// <inheritdoc />
-        public void Dispose()
-        {
-        }
+		/// <inheritdoc />
+		public void Dispose()
+		{
+		}
 
-        /// <inheritdoc />
-        public string ServerRelativeUrl { get; set; }
+		/// <inheritdoc />
+		public string ServerRelativeUrl { get; set; }
 
-        /// <inheritdoc />
-        public SwDynamicList GetList(string listName, SwListTemplate template = SwListTemplate.List)
-        {
-            return new SwDynamicMockList(listName, _lists.Tables[listName + "#" + template], template);
-        }
+		/// <inheritdoc />
+		public SwDynamicList GetList(string listName, SwListTemplate template = SwListTemplate.List)
+		{
+			return new SwDynamicMockList(listName, _lists.Tables[listName + "#" + template], template);
+		}
 
-        /// <inheritdoc />
-        public ISwList<T> GetList<T>(string listName, SwListTemplate template = SwListTemplate.List)
-            where T : SwListItem
-        {
-            return new SwMockList<T>(this, _lists.Tables[listName + "#" + template], listName, template);
-        }
-    }
+		/// <inheritdoc />
+		public ISwList<T> GetList<T>(string listName, SwListTemplate template = SwListTemplate.List)
+				where T : SwListItem
+		{
+			return new SwMockList<T>(this, _lists.Tables[listName + "#" + template], listName, template);
+		}
+	}
 }

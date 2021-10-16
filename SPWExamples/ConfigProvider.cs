@@ -1,8 +1,7 @@
 ﻿namespace SPW.Examples
 {
-	using System.Configuration;
-
 	using SPW.Utils;
+	using System.Configuration;
 
 	/// <summary>
 	///   Config Provider

@@ -12,7 +12,15 @@
 		/// </summary>
 		/// <param name="sItem">Item to create.</param>
 		/// <returns>Created item</returns>
-		SwItemData Create(SwItemData sItem);
+		void InsertOnSubmit(SwItemData sItem);
+
+
+		/// <summary>
+		///   Creates the specified item.
+		/// </summary>
+		/// <param name="sItem">Item to create.</param>
+		/// <returns>Created item</returns>
+		void UpdateOnSubmit(SwItemData sItem);
 
 		/// <summary>
 		///   Deletes item from list with specified identifier
@@ -43,10 +51,8 @@
 		void Recycle(int sItemId);
 
 		/// <summary>
-		///   Updates item in SP list with current values
+		///  Iterates items in list
 		/// </summary>
-		/// <param name="sItem">Item that needs to updated.</param>
-		/// <returns>Updated item</returns>
-		SwItemData Update(SwItemData sItem);
+		IEnumerable<SwItemData> Items { get; }
 	}
 }

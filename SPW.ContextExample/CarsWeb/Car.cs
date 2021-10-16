@@ -1,14 +1,14 @@
-﻿using System;
-using SPW.SwListItemAttributes;
+﻿using SPW.SwListItemAttributes;
+using System;
 
 namespace SPW.ContextExample.CarsWeb
 {
-    public class Car : SwListItem
-    {
-        [SwField(InternalName = "Produced")]
-        public DateTime? Produced { get; set; }
+	public class Car : SwListItem
+	{
+		[SwField(InternalName = "Produced")]
+		public DateTime? Produced { get; set; }
 
-        [SwField]
-        public string Title { get; set; }
-    }
+		[SwField]
+		public string Title { get; set; }
+	}
 }

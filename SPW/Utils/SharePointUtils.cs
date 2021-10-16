@@ -1,10 +1,7 @@
 ﻿namespace SPW.Utils
 {
-	using System;
-	using System.Collections.Generic;
-
 	using Microsoft.SharePoint;
-	using Microsoft.SharePoint.Utilities;
+	using System.Collections.Generic;
 
 	/// <summary>
 	/// Utilities for SharePoint
@@ -16,10 +13,10 @@
 		/// </summary>
 		public static Dictionary<SwListTemplate, SPListTemplateType> ListTemplateMatch =>
 			new Dictionary<SwListTemplate, SPListTemplateType>
-				{
-					[SwListTemplate.Library] = SPListTemplateType.DocumentLibrary,
-					[SwListTemplate.List] = SPListTemplateType.GenericList,
-					[SwListTemplate.TaskList] = SPListTemplateType.Tasks
-				};
+			{
+				[SwListTemplate.Library] = SPListTemplateType.DocumentLibrary,
+				[SwListTemplate.List] = SPListTemplateType.GenericList,
+				[SwListTemplate.TaskList] = SPListTemplateType.Tasks
+			};
 	}
 }

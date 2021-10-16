@@ -1,13 +1,11 @@
 ﻿namespace SPW
 {
-	using System.Collections.Generic;
-	using System.Linq;
-
 	using Microsoft.SharePoint;
-
 	using SPW.CamlBuilder;
 	using SPW.Extensions;
 	using SPW.Utils;
+	using System.Collections.Generic;
+	using System.Linq;
 
 	/// <summary>
 	/// Dynamic list implementation
@@ -26,6 +24,8 @@
 			: base(swWeb, listName, template)
 		{
 		}
+
+		public IEnumerable<SwItemData> Items => throw new System.NotImplementedException();
 
 		/// <inheritdoc />
 		public SwItemData Create(SwItemData sItem)
@@ -55,6 +55,11 @@
 			return items.Cast<SPListItem>().Select(i => CommonUtils.ConvertSpItemToSwItem(i, fieldNames.ToArray()));
 		}
 
+		public void InsertOnSubmit(SwItemData sItem)
+		{
+			throw new System.NotImplementedException();
+		}
+
 		/// <inheritdoc />
 		public SwItemData Update(SwItemData sItem)
 		{
@@ -66,6 +71,11 @@
 
 			spNewItem.Update();
 			return CommonUtils.ConvertSpItemToSwItem(spNewItem, sItem.Keys.ToArray());
+		}
+
+		public void UpdateOnSubmit(SwItemData sItem)
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }

@@ -1,17 +1,15 @@
 ﻿namespace SPW
 {
+	using Microsoft.SharePoint;
+	using SPW.Utils;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 
-	using Microsoft.SharePoint;
-
-	using SPW.Utils;
-
 	public class SwList<T> : SwListBase, ISwList<T>
 		where T : SwListItem
 	{
-		internal SwList(ISwWeb swWeb, string listName, SwListTemplate template = SwListTemplate.List)
+		internal SwList(SwWeb swWeb, string listName, SwListTemplate template = SwListTemplate.List)
 			: base(swWeb, listName, template)
 		{
 		}
@@ -81,6 +79,11 @@
 
 			sItem.ID = spItem.ID;
 			return sItem;
+		}
+
+		public T InsertOnSubmit(T sItem)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

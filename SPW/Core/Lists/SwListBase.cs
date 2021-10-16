@@ -1,11 +1,10 @@
 ﻿namespace SPW
 {
+	using Microsoft.SharePoint;
 	using System;
 
-	using Microsoft.SharePoint;
-
 	/// <summary>
-	///   List with base implementations
+	///   List with base implementations.
 	/// </summary>
 	public abstract class SwListBase
 	{
@@ -64,7 +63,7 @@
 		/// <returns>Returns SharePoint List from web</returns>
 		private SPList GetList()
 		{
-			return ((SwWeb)this.ParentWeb)._getList(this.ListName, this.Template);
+			return this.ParentWeb.GetSpList(this.ListName, this.Template);
 		}
 	}
 }

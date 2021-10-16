@@ -1,7 +1,6 @@
 ﻿namespace SPW
 {
 	using System.Collections.Generic;
-	using System.Linq;
 
 	/// <summary>
 	///   Strongly Typed List Instance
@@ -15,21 +14,13 @@
 		/// </summary>
 		/// <param name="sItem">Item to create.</param>
 		/// <returns>Created item</returns>
-		T Create(T sItem);
+		T InsertOnSubmit(T sItem);
 
 		/// <summary>
 		/// Deletes item from list with specified identifier
 		/// </summary>
 		/// <param name="sItemId">ID of the item.</param>
 		void Delete(int sItemId);
-
-		// /// <summary>
-		// /// E
-		// /// </summary>
-		// /// <param name="query">The query.</param>
-		// /// <param name="sItem">The s item.</param>
-		// /// <returns></returns>
-		// T EnsureItem(IQueryable<T> query, T sItem);
 
 		/// <summary>
 		/// Gets item from list by ID
@@ -44,6 +35,9 @@
 		/// <param name="camlQuery">The caml query.</param>
 		/// <returns>Collection of items</returns>
 		IEnumerable<T> GetItems(string camlQuery);
+
+
+
 
 		/// <summary>
 		/// Recycles item with specified id
