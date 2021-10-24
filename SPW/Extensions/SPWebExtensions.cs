@@ -6,18 +6,18 @@
 	using System;
 
 	/// <summary>
-	///   Extensions for SPWeb class
+	///   Extensions for SPWeb class.
 	/// </summary>
 	public static class SpWebExtensions
 	{
 		/// <summary>
 		/// Finds list by listName and listType.
 		/// </summary>
-		/// <param name="spWeb">Web site</param>
-		/// <param name="listName">Url name of the list that comes after /lists/ or webUrl for libraries</param>
-		/// <param name="listType">Type of the list</param> 
-		/// <returns>SharePoint list</returns>
-		/// <exception cref="ArgumentNullException">spWeb</exception>
+		/// <param name="spWeb">Web site.</param>
+		/// <param name="listName">Url name of the list that comes after /lists/ or webUrl for libraries.</param>
+		/// <param name="listType">Type of the list.</param> 
+		/// <returns>SharePoint list.</returns>
+		/// <exception cref="ArgumentNullException">spWeb.</exception>
 		public static SPList SwGetList(this SPWeb spWeb, string listName, SwListTemplate listType)
 		{
 			if (spWeb == null)

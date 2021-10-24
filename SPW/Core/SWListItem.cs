@@ -3,7 +3,7 @@
 	using SPW.SwListItemAttributes;
 
 	/// <summary>
-	///   Strongly Typed SharePoint item
+	///   Strongly Typed SharePoint item.
 	/// </summary>
 	public class SwListItem
 	{

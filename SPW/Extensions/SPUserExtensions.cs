@@ -4,14 +4,14 @@ using Microsoft.SharePoint.Administration.Claims;
 namespace SPW.Extensions
 {
 	/// <summary>
-	///   Extensions for SPUser
+	///   Extensions for SPUser.
 	/// </summary>
 	public static class SPUserExtensions
 	{
 		/// <summary>
 		///     Настоящий логин пользователя, без Claim Provider меток.
 		/// </summary>
-		/// <param name="user">SPUser</param>
+		/// <param name="user">SPUser.</param>
 		/// <returns></returns>
 		public static string Login(this SPUser user)
 		{

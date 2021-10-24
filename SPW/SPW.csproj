@@ -55,11 +55,16 @@
     <Compile Include="Autofac\Module.cs" />
     <Compile Include="CamlBuilder\FieldRef.cs" />
     <Compile Include="CamlBuilder\SwQuery.cs" />
-    <Compile Include="Contracts\ISwDynamicList.cs" />
-    <Compile Include="Contracts\ISwContext.cs" />
-    <Compile Include="Contracts\ISwUser.cs" />
-    <Compile Include="Core\Sites\SwSitesContext.cs" />
-    <Compile Include="Core\SwWeb\UrlLoginTuple.cs" />
+    <Compile Include="Common\SortedVocabulary.cs" />
+    <Compile Include="Common\Vocabulary.cs" />
+    <Compile Include="Core\Lists\ISwDynamicList.cs" />
+    <Compile Include="Core\SwContext\ChangeItem.cs" />
+    <Compile Include="Core\SwContext\ChangesManager.cs" />
+    <Compile Include="Core\SwContext\FarmCache.cs" />
+    <Compile Include="Core\SwContext\ISwContext.cs" />
+    <Compile Include="Core\Lists\ISwList.cs" />
+    <Compile Include="Core\SwContext\SystemSiteCache.cs" />
+    <Compile Include="Core\SwContext\SiteCache.cs" />
     <Compile Include="Deployment\SwConcreteSite.cs" />
     <Compile Include="Deployment\SwConcreteWeb.cs" />
     <Compile Include="Extensions\SPUserExtensions.cs" />
@@ -70,14 +75,13 @@
     <Compile Include="LINQ\QueryProvider.cs" />
     <Compile Include="Extensions\ListItemExtension.cs" />
     <Compile Include="Utils\FieldTypeMapper.cs" />
-    <Compile Include="Contracts\ISwList.cs" />
     <Compile Include="Core\SwWeb\ISwWeb.cs" />
-    <Compile Include="Core\SwContext.cs" />
-    <Compile Include="Core\SwDynamicList.cs" />
-    <Compile Include="Core\SwList.cs" />
-    <Compile Include="Core\SwListBase.cs" />
+    <Compile Include="Core\SwContext\SwContext.cs" />
+    <Compile Include="Core\Lists\SwDynamicList.cs" />
+    <Compile Include="Core\Lists\SwList.cs" />
+    <Compile Include="Core\Lists\SwListBase.cs" />
     <Compile Include="CamlBuilder\ViewFields.cs" />
-    <Compile Include="Core\SwListTemplate.cs" />
+    <Compile Include="Core\Lists\SwListTemplate.cs" />
     <Compile Include="Core\SwItemData.cs" />
     <Compile Include="Core\SwListItem.cs" />
     <Compile Include="Core\SwListItemAttributes\FieldAttribute.cs" />
@@ -88,9 +92,10 @@
     <Compile Include="LINQ\QueryTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\CommonUtils.cs" />
-    <Compile Include="Utils\ISwConfigProvider.cs" />
+    <Compile Include="Core\SwContext\ISwConfigProvider.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
     <Compile Include="Utils\SharePointUtils.cs" />
+    <Compile Include="Utils\SwConstants.cs" />
     <Compile Include="Utils\WebSiteContext.cs" />
     <Compile Include="Extensions\StringXmlExtensions.cs" />
   </ItemGroup>
@@ -103,6 +108,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+    <Folder Include="Core\Sites\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

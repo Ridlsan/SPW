@@ -3,7 +3,7 @@
 	using System;
 
 	/// <summary>
-	///   Attribute that says the property of class is SP field
+	///   Attribute that says the property of class is SP field.
 	/// </summary>
 	/// <seealso cref="System.Attribute" />
 	[AttributeUsage(AttributeTargets.Property)]

@@ -3,12 +3,12 @@
 	using System;
 
 	/// <summary>
-	///   Singleton mapper for fields
+	///   Singleton mapper for fields.
 	/// </summary>
 	internal class FieldTypeMapper
 	{
 		/// <summary>
-		///   Instance
+		///   Instance.
 		/// </summary>
 		private static FieldTypeMapper fieldTypeMapper;
 
@@ -20,16 +20,16 @@
 		}
 
 		/// <summary>
-		///   Returns single instance
+		///   Returns single instance.
 		/// </summary>
 		public static FieldTypeMapper Instance => fieldTypeMapper ?? (fieldTypeMapper = new FieldTypeMapper());
 
 		/// <summary>
-		/// Converts the value of SharePoint Item to class property type
+		/// Converts the value of SharePoint Item to class property type.
 		/// </summary>
 		/// <param name="fieldValue">Item field value.</param>
 		/// <param name="resultType">Type of the result.</param>
-		/// <returns>converted object</returns>
+		/// <returns>converted object.</returns>
 		public object ConvertValue(object fieldValue, Type resultType)
 		{
 			if (fieldValue == null)

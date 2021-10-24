@@ -4,12 +4,12 @@ using System;
 namespace SPW.Extensions
 {
 	/// <summary>
-	///     Расширение для списков
+	///     Расширение для списков.
 	/// </summary>
 	public static class ListItemExtension
 	{
 		/// <summary>
-		///     Return item value with specified type
+		///     Return item value with specified type.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="item">The item.</param>
@@ -38,7 +38,7 @@ namespace SPW.Extensions
 		}
 
 		/// <summary>
-		///     Return item value of string
+		///     Return item value of string.
 		/// </summary>
 		/// <param name="item">The item.</param>
 		/// <param name="fieldName">Name of the field.</param>
@@ -54,7 +54,7 @@ namespace SPW.Extensions
 		}
 
 		/// <summary>
-		///     Return item value of string
+		///     Return item value of string.
 		/// </summary>
 		/// <param name="item">The item.</param>
 		/// <param name="fieldName">Name of the field.</param>
@@ -70,7 +70,7 @@ namespace SPW.Extensions
 		}
 
 		/// <summary>
-		///     Return item value of string
+		///     Return item value of string.
 		/// </summary>
 		/// <param name="item">The item.</param>
 		/// <param name="fieldName">Name of the field.</param>
@@ -96,7 +96,7 @@ namespace SPW.Extensions
 		}
 
 		/// <summary>
-		///     Return item value of string
+		///     Return item value of string.
 		/// </summary>
 		/// <param name="item">The item.</param>
 		/// <param name="fieldName">Name of the field.</param>
@@ -122,7 +122,7 @@ namespace SPW.Extensions
 		}
 
 		/// <summary>
-		///     Return item value of string
+		///     Return item value of string.
 		/// </summary>
 		/// <param name="item">The item.</param>
 		/// <param name="fieldName">Name of the field.</param>
@@ -148,7 +148,7 @@ namespace SPW.Extensions
 		}
 
 		/// <summary>
-		///     Возвращает урл формы на текущий элемент
+		///     Возвращает урл формы на текущий элемент.
 		/// </summary>
 		/// <param name="item">Элемент.</param>
 		/// <param name="pagetype">Тип формы.</param>
@@ -159,7 +159,7 @@ namespace SPW.Extensions
 		}
 
 		/// <summary>
-		///     Возвращает HTML ссылку формы на текущий элемент
+		///     Возвращает HTML ссылку формы на текущий элемент.
 		/// </summary>
 		/// <param name="item">Элемент.</param>
 		/// <param name="pagetype">Тип формы.</param>

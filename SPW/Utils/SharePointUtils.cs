@@ -4,12 +4,12 @@
 	using System.Collections.Generic;
 
 	/// <summary>
-	/// Utilities for SharePoint
+	/// Utilities for SharePoint.
 	/// </summary>
 	public static class SharePointUtils
 	{
 		/// <summary>
-		/// Match for templates in SharePoint and in SPW
+		/// Match for templates in SharePoint and in SPW.
 		/// </summary>
 		public static Dictionary<SwListTemplate, SPListTemplateType> ListTemplateMatch =>
 			new Dictionary<SwListTemplate, SPListTemplateType>

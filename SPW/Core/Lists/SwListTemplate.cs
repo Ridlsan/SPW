@@ -1,7 +1,7 @@
 ﻿namespace SPW
 {
 	/// <summary>
-	///   List Tempaltes in SPW
+	///   List Tempaltes in SPW.
 	/// </summary>
 	public enum SwListTemplate
 	{

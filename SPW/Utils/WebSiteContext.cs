@@ -4,7 +4,7 @@
 	using System;
 
 	/// <summary>
-	///   Provides with web and site initialization
+	///   Provides with web and site initialization.
 	/// </summary>
 	/// <seealso cref="System.IDisposable" />
 	public class WebSiteContext : IDisposable
@@ -15,7 +15,7 @@
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WebSiteContext"/> class.
 		/// </summary>
-		/// <param name="webUrl">Full url for webSite or relative, than the root will be added from configProvider</param>
+		/// <param name="webUrl">Full url for webSite or relative, than the root will be added from configProvider.</param>
 		/// <param name="configProvider">The configuration provider.</param>
 		public WebSiteContext(string serverUrl, string webUrl, SPUserToken userToken = null)
 		{

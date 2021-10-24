@@ -3,7 +3,7 @@
 	using global::Autofac;
 
 	/// <summary>
-	///   Autofac module
+	///   Autofac module.
 	/// </summary>
 	/// <seealso cref="Autofac.Module" />
 	public class SpwModule : Module

@@ -3,15 +3,15 @@
 	using System.Reflection;
 
 	/// <summary>
-	///   Utilities for reflection
+	///   Utilities for reflection.
 	/// </summary>
 	public class ReflectionUtils
 	{
 		/// <summary>
-		/// Finds properties in SwListItem that fits some BindingFlags
+		/// Finds properties in SwListItem that fits some BindingFlags.
 		/// </summary>
-		/// <typeparam name="T">The SwListItem</typeparam>
-		/// <returns>Property collection</returns>
+		/// <typeparam name="T">The SwListItem.</typeparam>
+		/// <returns>Property collection.</returns>
 		public static PropertyInfo[] GetProperties<T>()
 			where T : SwListItem
 		{

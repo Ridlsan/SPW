@@ -5,7 +5,7 @@
 	using System.Xml.Serialization;
 
 	/// <summary>
-	///   Utilities for XML
+	///   Utilities for XML.
 	/// </summary>
 	internal static class StringXmlExtensions
 	{

@@ -10,6 +10,6 @@
 	public class ConfigProvider : ISwConfigProvider
 	{
 		/// <inheritdoc />
-		public string SiteUrl => ConfigurationManager.AppSettings["serverUrl"];
+		public string ServerUrl => ConfigurationManager.AppSettings["serverUrl"];
 	}
 }

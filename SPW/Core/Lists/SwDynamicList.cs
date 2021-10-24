@@ -8,7 +8,7 @@
 	using System.Linq;
 
 	/// <summary>
-	/// Dynamic list implementation
+	/// Dynamic list implementation.
 	/// </summary>
 	/// <seealso cref="SPW.SwListBase" />
 	/// <seealso cref="SPW.ISwDynamicList" />
@@ -17,15 +17,14 @@
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SwDynamicList"/> class.
 		/// </summary>
-		/// <param name="swWeb">IswWeb</param>
-		/// <param name="listName">Name of the list (url part after "/lists/" or webUrl for libs)</param>
-		/// <param name="template">Template of the list</param>
-		public SwDynamicList(ISwWeb swWeb, string listName, SwListTemplate template = SwListTemplate.List)
+		/// <param name="swWeb">IswWeb.</param>
+		/// <param name="listName">Name of the list (url part after "/lists/" or webUrl for libs).</param>
+		/// <param name="template">Template of the list.</param>
+		public SwDynamicList(SwWeb swWeb, string listName, SwListTemplate template = SwListTemplate.List)
 			: base(swWeb, listName, template)
 		{
-		}
 
-		public IEnumerable<SwItemData> Items => throw new System.NotImplementedException();
+		}
 
 		/// <inheritdoc />
 		public SwItemData Create(SwItemData sItem)
@@ -38,6 +37,11 @@
 
 			spNewItem.Update();
 			return CommonUtils.ConvertSpItemToSwItem(spNewItem, sItem.Keys.ToArray());
+		}
+
+		public void Delete(SwItemData sItem)
+		{
+			this.SpList.Value.GetItemById(sItem.Id).Delete();
 		}
 
 		public SwItemData Find(int sItemId, params string[] values)
@@ -58,6 +62,11 @@
 		public void InsertOnSubmit(SwItemData sItem)
 		{
 			throw new System.NotImplementedException();
+		}
+
+		public void Recycle(SwItemData sItem)
+		{
+			this.SpList.Value.GetItemById(sItem.Id).Recycle();
 		}
 
 		/// <inheritdoc />
