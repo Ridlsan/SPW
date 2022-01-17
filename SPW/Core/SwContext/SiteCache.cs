@@ -1,8 +1,8 @@
 ﻿namespace SPW
 {
-	using System;
 	using Microsoft.SharePoint;
 	using SPW.Common;
+	using System;
 
 	/// <summary>
 	///  Cache for opened SPSites.

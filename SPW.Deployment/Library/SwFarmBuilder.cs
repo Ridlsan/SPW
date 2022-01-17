@@ -33,7 +33,7 @@ namespace SPW.Deployment.Library
 			{
 				using (var spSite = _app.EnsureSite(buildingWeb, _dbUser))
 				{
-					var webUrl = (_webAppUrl + buildingWeb.ServerRelativeUrl).Replace(spSite.Url, "");
+					var webUrl = (_webAppUrl + buildingWeb.Url).Replace(spSite.Url, "");
 					var spWeb = spSite.EnsureWeb(
 							webUrl,
 							buildingWeb.Title,

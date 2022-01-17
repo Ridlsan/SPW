@@ -1,4 +1,4 @@
-﻿namespace SPW.Utils
+﻿namespace SPW
 {
 	/// <summary>
 	/// Usefull constants.

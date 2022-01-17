@@ -22,29 +22,26 @@ namespace SPW.Examples
 				["Produced"] = DateTime.Today
 			};
 
-			var sCarsList = _swContext.GetWeb("myweb").GetList("cars");
-			sCarsList.InsertOnSubmit(sItem);
-			_swContext.SubmitChanges();
-			var newItem = sCarsList.Find(sItem.Id, "Produced", "Title");
+			var sCarsList = _swContext.GetWeb("production").GetList("cars");
+			sCarsList.Add(sItem);
+			var newItem = sCarsList.Find(sItem.ID, new[] { "Produced", "Title" });
 			newItem["Produced"] = DateTime.Parse("01.01.2000");
 			newItem["Title"] = "Mazda CX-5";
-			sCarsList.UpdateOnSubmit(newItem);
-			_swContext.SubmitChanges();
+			sCarsList.Update(newItem);
 		}
 
 		public void GetUserAndRights()
 		{
-			var sWeb = _swContext.GetWeb("myweb");
-			var currentUser = sWeb.CurrentUser;
-			var newItem = sWeb.GetList("cars").Items.First();
-
-
-
+			var sWeb = _swContext.GetWeb("production");
+			var user = sWeb.CurrentUser;
+			var sCarsList = sWeb.GetList("cars");
+			var newItem = sCarsList.Find(2);
+			var canEdit = sCarsList.DoesUserHasPermissions(newItem, ListItemRights.Edit, user);
 		}
 
 		public IEnumerable<SwItemData> QueryItems()
 		{
-			var someList = _swContext.GetWeb("myweb").GetList("cars");
+			var someList = _swContext.GetWeb("production").GetList("cars");
 			return someList.GetItems(
 					CQ.Where(CQ.Eq.FieldRef("Produced").Value(DateTime.Parse("01.01.2000"))),
 					CQ.ViewFields(CQ.FieldRef("Produced"))

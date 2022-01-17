@@ -1,13 +1,14 @@
 ﻿namespace SPW
 {
 	using Microsoft.SharePoint;
+	using SPW.Common;
 	using SPW.Utils;
 
 	/// <summary>
 	///   SPW Context.
 	/// </summary>
 	/// <seealso cref="ISwContext" />
-	internal class SwContext : ISwContext
+	public class SwContext : ISwContext
 	{
 		/// <summary>
 		///   The configuration provider.
@@ -16,7 +17,7 @@
 
 		private readonly FarmCache farm;
 
-		private readonly ChangesManager changesManager = new ChangesManager();
+		private readonly Vocabulary<(string url, string login), SwWeb> createdSwWebs = new Vocabulary<(string url, string login), SwWeb>();
 
 		/// <summary>
 		///   Initializes a new instance of the <see cref="SwContext" /> class.
@@ -26,6 +27,10 @@
 		{
 			this.configProvider = configProvider;
 			this.farm = new FarmCache(this.configProvider);
+			this.createdSwWebs.OnMissingGet = ((string url, string login) key) =>
+			{
+				return new SwWeb(this, key.url, key.login);
+			};
 		}
 
 		/// <summary>
@@ -49,26 +54,19 @@
 		{
 			return new SwWeb(this, url, login);
 		}
-
-		public void AddChange(SwDynamicList list, SwItemData swItem, OperationType operationType)
-		{
-			this.changesManager.AddChange(list, swItem, operationType);
-		}
-
-		public void SubmitChanges()
-		{
-			this.changesManager.RunChanges();
-		}
 	}
+
 
 	/// <summary>
 	/// File Operations.
 	/// </summary>
 	internal enum OperationType
 	{
-		Add = 0,
-		Update = 1,
-		Recycle = 2,
-		Delete = 3,
+		None = 0,
+		Add = 15,
+		Update = 30,
+		Recycle = 40,
+		Delete = 50,
 	}
+
 }

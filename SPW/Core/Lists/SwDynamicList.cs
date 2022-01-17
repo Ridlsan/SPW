@@ -14,6 +14,8 @@
 	/// <seealso cref="SPW.ISwDynamicList" />
 	internal class SwDynamicList : SwListBase, ISwDynamicList
 	{
+		private Dictionary<int, SPListItem> populatedItems = new Dictionary<int, SPListItem>();
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SwDynamicList"/> class.
 		/// </summary>
@@ -23,30 +25,21 @@
 		public SwDynamicList(SwWeb swWeb, string listName, SwListTemplate template = SwListTemplate.List)
 			: base(swWeb, listName, template)
 		{
-
 		}
 
-		/// <inheritdoc />
-		public SwItemData Create(SwItemData sItem)
+		private SwItemData Find(int sItemId, IEnumerable<string> fields)
 		{
-			var spNewItem = this.SpList.Value.AddItem();
-			foreach (var fieldName in sItem.Keys)
+			return CommonUtils.FillItemDataFromSpItem(new SwItemData(), this.GetItemById(sItemId), fields);
+		}
+
+		private SPListItem GetItemById(int sItemId)
+		{
+			if (this.populatedItems.ContainsKey(sItemId))
 			{
-				spNewItem[fieldName] = sItem[fieldName];
+				return this.populatedItems[sItemId];
 			}
 
-			spNewItem.Update();
-			return CommonUtils.ConvertSpItemToSwItem(spNewItem, sItem.Keys.ToArray());
-		}
-
-		public void Delete(SwItemData sItem)
-		{
-			this.SpList.Value.GetItemById(sItem.Id).Delete();
-		}
-
-		public SwItemData Find(int sItemId, params string[] values)
-		{
-			return CommonUtils.ConvertSpItemToSwItem(this.SpList.Value.GetItemById(sItemId), values);
+			return this.SpList.Value.GetItemById(sItemId);
 		}
 
 		/// <inheritdoc />
@@ -56,35 +49,76 @@
 			var items = this.SpList.Value.GetItems(spQuery);
 			var fieldRefs = $"<ViewFields>{viewFields}</ViewFields>".ParseXML<ViewFields>();
 			var fieldNames = fieldRefs.FieldRef.Select(i => i.Name);
-			return items.Cast<SPListItem>().Select(i => CommonUtils.ConvertSpItemToSwItem(i, fieldNames.ToArray()));
-		}
-
-		public void InsertOnSubmit(SwItemData sItem)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public void Recycle(SwItemData sItem)
-		{
-			this.SpList.Value.GetItemById(sItem.Id).Recycle();
+			return items.Cast<SPListItem>().Select(i => CommonUtils.FillItemDataFromSpItem(new SwItemData(), i, fieldNames.ToArray()));
 		}
 
 		/// <inheritdoc />
-		public SwItemData Update(SwItemData sItem)
+		public SwItemData Update(SwItemData swItem, UpdateProps props = null)
 		{
-			var spNewItem = this.SpList.Value.GetItemById(sItem.Id);
+			var spNewItem = this.SpList.Value.GetItemById(swItem.ID);
+			foreach (var fieldName in swItem.Keys)
+			{
+				spNewItem[fieldName] = swItem[fieldName];
+			}
+
+			if (!spNewItem.DoesUserHavePermissions(SPBasePermissions.EditListItems))
+			{
+				var list = this.Web.Context.GetWeb(this.Web.ServerRelativeUrl, SwConstants.SytemLogin).GetList(this.ListName, this.Template) as SwDynamicList;
+				var item = list.Find(swItem.ID);
+			}
+
+			// TODO replace with enhanced update
+			spNewItem.Update();
+			return CommonUtils.FillItemDataFromSpItem(swItem, spNewItem);
+		}
+
+		/// <inheritdoc/>
+		public SwItemData Add(SwItemData sItem)
+		{
+			var spNewItem = this.SpList.Value.AddItem();
 			foreach (var fieldName in sItem.Keys)
 			{
 				spNewItem[fieldName] = sItem[fieldName];
 			}
 
 			spNewItem.Update();
-			return CommonUtils.ConvertSpItemToSwItem(spNewItem, sItem.Keys.ToArray());
+			return CommonUtils.FillItemDataFromSpItem(sItem, spNewItem);
 		}
 
-		public void UpdateOnSubmit(SwItemData sItem)
+		/// <inheritdoc/>
+		public SwItemData Find(int sItemId, params string[] fieldNames)
 		{
-			throw new System.NotImplementedException();
+			return this.Find(sItemId, fieldNames.ToList());
 		}
+
+		/// <inheritdoc/>
+		public bool DoesUserHasPermissions(SwItemData swItem, ListItemRights permission, ISwUser user = null)
+		{
+			var spItem = this.GetItemById(swItem.ID);
+			var rights = SPBasePermissions.EmptyMask;
+
+			if ((permission & ListItemRights.Delete) != 0)
+			{
+				rights |= SPBasePermissions.DeleteListItems;
+			}
+
+			if ((permission & ListItemRights.Edit) != 0)
+			{
+				rights |= SPBasePermissions.EditListItems;
+			}
+
+			if ((permission & ListItemRights.View) != 0)
+			{
+				rights |= SPBasePermissions.ViewListItems;
+			}
+
+			if (user != null)
+			{
+				return spItem.DoesUserHavePermissions((user as SwUser).SpUser, rights);
+			}
+
+			return spItem.DoesUserHavePermissions(rights);
+		}
+
 	}
 }

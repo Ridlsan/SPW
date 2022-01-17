@@ -1,36 +1,19 @@
-﻿using SPW.Deployment;
-using System;
-
-namespace SPW
+﻿namespace SPW
 {
-	public abstract class SwConcreteWeb : IDisposable
+	public abstract class SwConcreteWeb
 	{
 		protected readonly ISwContext _context;
-		protected readonly Lazy<ISwWeb> _sWeb;
 
 		public SwConcreteWeb(ISwContext context)
 		{
 			_context = context;
-			_sWeb = new Lazy<ISwWeb>(InitWeb);
 		}
 
-		public abstract SwConcreteSite Site { get; }
-		public abstract string ServerRelativeUrl { get; }
-		public abstract string Title { get; }
-		public virtual string Description { get; }
-		public virtual int CultureId => 1049;
+		public abstract string Url { get; }
 
-		public void Dispose()
-		{
-			if (_sWeb.IsValueCreated)
-			{
-				_sWeb.Value?.Dispose();
-			}
-		}
-
-		private ISwWeb InitWeb()
-		{
-			return _context.GetWeb(ServerRelativeUrl);
-		}
+		/// <summary>
+		/// Returns web isntance.
+		/// </summary>
+		public ISwWeb Web => this._context.GetWeb(this.Url);
 	}
 }

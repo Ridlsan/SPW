@@ -15,36 +15,36 @@ namespace SPW.Mocks
 		}
 
 
-		private SwItemData ConvertDataRowToSwItem(DataRow dataItem, params string[] fieldNames)
+		private SwItemEntry ConvertDataRowToSwItem(DataRow dataItem, params string[] fieldNames)
 		{
-			var swItem = new SwItemData();
+			var swItem = new SwItemEntry();
 
 			foreach (var fieldName in fieldNames)
 			{
 				swItem[fieldName] = dataItem[fieldName];
 			}
 
-			var field = typeof(SwItemData).GetProperties().First(p => p.Name == "ID");
+			var field = typeof(SwItemEntry).GetProperties().First(p => p.Name == "ID");
 			field.SetValue(swItem, dataItem.Field<int>("ID"));
 			return swItem;
 		}
 
 		/// <inheritdoc />
-		public SwItemData Find(int sItemId, params string[] fieldNames)
+		public SwItemEntry Find(int sItemId, params string[] fieldNames)
 		{
 			var spItem = ListData.GetById(sItemId);
 			return ConvertDataRowToSwItem(spItem, fieldNames);
 		}
 
 		/// <inheritdoc />
-		public IEnumerable<SwItemData> GetItems(string query, string viewFields)
+		public IEnumerable<SwItemEntry> GetItems(string query, string viewFields)
 		{
 			throw new NotImplementedException();
 		}
 
 
 		/// <inheritdoc />
-		public SwItemData Create(SwItemData sItem)
+		public SwItemEntry Create(SwItemEntry sItem)
 		{
 			var newRow = ListData.NewRow();
 			foreach (var fieldName in sItem.Keys)
@@ -57,7 +57,7 @@ namespace SPW.Mocks
 			return ConvertDataRowToSwItem(newRow, sItem.Keys.ToArray());
 		}
 
-		private static void FillDataRow(SwItemData sItem, string fieldName, DataRow newRow)
+		private static void FillDataRow(SwItemEntry sItem, string fieldName, DataRow newRow)
 		{
 			if (sItem[fieldName] == null)
 			{
@@ -70,7 +70,7 @@ namespace SPW.Mocks
 		}
 
 		/// <inheritdoc />
-		public SwItemData Update(SwItemData sItem)
+		public SwItemEntry Update(SwItemEntry sItem)
 		{
 			var dataRow = ListData.GetById(sItem.Id);
 			foreach (var fieldName in sItem.Keys)

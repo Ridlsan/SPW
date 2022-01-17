@@ -11,6 +11,6 @@
 		///   ID.
 		/// </summary>
 		[SwField]
-		public int ID { get; internal set; }
+		public int ID { get; set; }
 	}
 }

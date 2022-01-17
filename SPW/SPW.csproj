@@ -41,6 +41,9 @@
     <Reference Include="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\SharePoint.dll.2016.SSOM.16.0.4327.1000\lib\Microsoft.SharePoint\Microsoft.SharePoint.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -57,14 +60,25 @@
     <Compile Include="CamlBuilder\SwQuery.cs" />
     <Compile Include="Common\SortedVocabulary.cs" />
     <Compile Include="Common\Vocabulary.cs" />
+    <Compile Include="Constants\SpCommonList.cs" />
     <Compile Include="Core\Lists\ISwDynamicList.cs" />
-    <Compile Include="Core\SwContext\ChangeItem.cs" />
-    <Compile Include="Core\SwContext\ChangesManager.cs" />
+    <Compile Include="Core\Lists\UpdateProps.cs" />
+    <Compile Include="Core\Permissions\ISwGroup.cs" />
+    <Compile Include="Core\Permissions\ISwPrincipal.cs" />
+    <Compile Include="Core\Permissions\ISwUser.cs" />
+    <Compile Include="Core\Permissions\ListItemRights.cs" />
+    <Compile Include="Core\Permissions\SwGroup.cs" />
+    <Compile Include="Core\Permissions\SwUser.cs" />
     <Compile Include="Core\SwContext\FarmCache.cs" />
     <Compile Include="Core\SwContext\ISwContext.cs" />
     <Compile Include="Core\Lists\ISwList.cs" />
     <Compile Include="Core\SwContext\SystemSiteCache.cs" />
     <Compile Include="Core\SwContext\SiteCache.cs" />
+    <Compile Include="Core\SwItemDataExtensions.cs" />
+    <Compile Include="Core\SwWeb\ISwGroupsCollection.cs" />
+    <Compile Include="Core\SwWeb\ISwUsersCollection.cs" />
+    <Compile Include="Core\SwWeb\SwGroupsCollection.cs" />
+    <Compile Include="Core\SwWeb\SwUserCollection.cs" />
     <Compile Include="Deployment\SwConcreteSite.cs" />
     <Compile Include="Deployment\SwConcreteWeb.cs" />
     <Compile Include="Extensions\SPUserExtensions.cs" />
@@ -74,6 +88,15 @@
     <Compile Include="LINQ\Query.cs" />
     <Compile Include="LINQ\QueryProvider.cs" />
     <Compile Include="Extensions\ListItemExtension.cs" />
+    <Compile Include="Mocks\SwMockContext.cs" />
+    <Compile Include="Mocks\SwMockGroupCollection.cs" />
+    <Compile Include="Mocks\SwMockList.cs" />
+    <Compile Include="Mocks\SwMockList{T}.cs" />
+    <Compile Include="Mocks\SwMockGroup.cs" />
+    <Compile Include="Mocks\SwMockUser.cs" />
+    <Compile Include="Mocks\SwMockUserCollection.cs" />
+    <Compile Include="Mocks\SwMockWeb.cs" />
+    <Compile Include="Mocks\SwMockUserWeb.cs" />
     <Compile Include="Utils\FieldTypeMapper.cs" />
     <Compile Include="Core\SwWeb\ISwWeb.cs" />
     <Compile Include="Core\SwContext\SwContext.cs" />
@@ -95,8 +118,7 @@
     <Compile Include="Core\SwContext\ISwConfigProvider.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
     <Compile Include="Utils\SharePointUtils.cs" />
-    <Compile Include="Utils\SwConstants.cs" />
-    <Compile Include="Utils\WebSiteContext.cs" />
+    <Compile Include="Constants\SwConstants.cs" />
     <Compile Include="Extensions\StringXmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

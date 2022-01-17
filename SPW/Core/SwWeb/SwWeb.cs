@@ -1,10 +1,9 @@
 ﻿namespace SPW
 {
-	using System;
 	using Microsoft.SharePoint;
 	using SPW.Common;
 	using SPW.Extensions;
-	using SPW.Utils;
+	using System;
 
 	/// <summary>
 	///   Initiates SwWeb.
@@ -12,6 +11,11 @@
 	/// <seealso cref="SPW.ISwWeb" />
 	internal class SwWeb : ISwWeb
 	{
+		/// <summary>
+		/// Gets Context.
+		/// </summary>
+		public SwContext Context { get; }
+
 		private class ListsCollection : Vocabulary<(string listName, SwListTemplate template), ISwDynamicList>
 		{
 			public ListsCollection(SwWeb web)
@@ -20,14 +24,13 @@
 			}
 		}
 
-		private Lazy<SPWeb> SPWeb;
+		public Lazy<SPWeb> SPWeb { get; }
 
 		/// <summary>
 		///   Cached lists on web.
 		/// </summary>
 		private readonly ListsCollection lists;
 
-		private readonly SwContext context;
 		private readonly string url;
 		private readonly string login;
 
@@ -39,17 +42,25 @@
 		/// <param name="login">Login.</param>
 		internal SwWeb(SwContext context, string url, string login)
 		{
-			this.context = context;
+			this.Context = context;
 			this.url = url;
 			this.login = login;
 			this.lists = new ListsCollection(this);
-			this.SPWeb = new Lazy<SPWeb>(() => this.context.GetSpWeb(this.url, this.login));
+			this.SPWeb = new Lazy<SPWeb>(() => this.Context.GetSpWeb(this.url, this.login));
+			this.Users = new SwUsersCollection(this);
+			this.Groups = new SwGroupsCollection(this);
 		}
 
 		/// <summary>
 		///   Server relative url.
 		/// </summary>
 		public string ServerRelativeUrl => this.url;
+
+		public ISwUser CurrentUser => new SwUser(this.SPWeb.Value.CurrentUser);
+
+		public ISwUsersCollection Users { get; }
+
+		public ISwGroupsCollection Groups { get; }
 
 		/// <inheritdoc />
 		public ISwDynamicList GetList(string listName, SwListTemplate template)
@@ -80,7 +91,6 @@
 		/// </summary>
 		private class WebSiteIndex
 		{
-
 		}
 
 	}

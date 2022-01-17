@@ -19,7 +19,6 @@
 		/// <returns>ISwDynamicList.</returns>
 		ISwDynamicList GetList(string listName, SwListTemplate template = SwListTemplate.List);
 
-
 		/// <summary>
 		///   Gets the strongly typed list.
 		/// </summary>
@@ -30,6 +29,11 @@
 		ISwList<T> GetList<T>(string listName, SwListTemplate template = SwListTemplate.List)
 			where T : SwListItem;
 
+		ISwUser CurrentUser { get; }
+
+		ISwUsersCollection Users { get; }
+
+		ISwGroupsCollection Groups { get; }
 
 	}
 }

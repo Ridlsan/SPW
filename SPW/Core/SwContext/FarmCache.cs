@@ -47,6 +47,25 @@
 			throw new Exception($"SiteUrl not found in config for web {webUrl}");
 		}
 
+		/// <summary>
+		/// Returns Site instance from cache. Its always the same object for all webs site.
+		/// </summary>
+		/// <param name="webUrl">Web url.</param>
+		/// <param name="login">Login.</param>
+		/// <returns>SPSite instance</returns>
+		internal SPWeb GetSwWeb(string webUrl, string login = null)
+		{
+			foreach (var siteUrl in this.sortedSiteUrls)
+			{
+				if (webUrl.StartsWith(siteUrl))
+				{
+					return this.EnsureSiteCache(siteUrl, login).GetWeb(webUrl);
+				}
+			}
+
+			throw new Exception($"SiteUrl not found in config for web {webUrl}");
+		}
+
 		private SiteCache EnsureSiteCache(string siteUrl, string login = null)
 		{
 			string fullSiteUrl = this.config.ServerUrl + siteUrl;

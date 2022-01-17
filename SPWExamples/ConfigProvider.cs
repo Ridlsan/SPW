@@ -1,6 +1,8 @@
 ﻿namespace SPW.Examples
 {
+	using Newtonsoft.Json;
 	using SPW.Utils;
+	using System.Collections.Generic;
 	using System.Configuration;
 
 	/// <summary>
@@ -10,6 +12,23 @@
 	public class ConfigProvider : ISwConfigProvider
 	{
 		/// <inheritdoc />
-		public string ServerUrl => ConfigurationManager.AppSettings["serverUrl"];
+		public string ServerUrl
+		{
+			get
+			{
+				return "http://test";
+			}
+		}
+
+		public List<string> SiteUrls
+		{
+			get
+			{
+				return new List<string>
+				{
+					""
+				};
+			}
+		}
 	}
 }

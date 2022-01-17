@@ -8,12 +8,10 @@
 		{
 		}
 
-		/// <inheritdoc />
-		public override string ServerRelativeUrl => "production";
 
 		/// <inheritdoc />
-		public override string Title => "Производство";
+		public override string Url => "production";
 
-		public ISwList<Car> Cars => _sWeb.Value.GetList<Car>("cars");
+		public ISwList<Car> Cars => this.Web.GetList<Car>("cars");
 	}
 }

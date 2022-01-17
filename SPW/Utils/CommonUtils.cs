@@ -1,6 +1,8 @@
 ﻿namespace SPW.Utils
 {
 	using Microsoft.SharePoint;
+	using System.Collections.Generic;
+	using System.Linq;
 
 	/// <summary>
 	///   Common utilities.
@@ -13,16 +15,20 @@
 		/// <param name="spItem">The sp item.</param>
 		/// <param name="fieldNames">Fields to convert.</param>
 		/// <returns>Constructed SwItemData.</returns>
-		public static SwItemData ConvertSpItemToSwItem(SPListItem spItem, params string[] fieldNames)
+		public static SwItemData FillItemDataFromSpItem(SwItemData swItem, SPListItem spItem, IEnumerable<string> fieldNames = null)
 		{
-			var swItem = new SwItemData();
+			if (fieldNames == null)
+			{
+				fieldNames = spItem.Fields.Cast<SPField>().Select(x => x.InternalName);
+			}
+
 			foreach (string fieldName in fieldNames)
 			{
 				swItem[fieldName] = spItem[fieldName];
 			}
 
-			swItem.Id = spItem.ID;
 			return swItem;
 		}
+
 	}
 }

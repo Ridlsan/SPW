@@ -45,6 +45,16 @@
 		/// </summary>
 		internal Lazy<SPList> SpList { get; }
 
+		public void Delete(int itemId)
+		{
+			this.SpList.Value.GetItemById(itemId).Delete();
+		}
+
+		public void Recycle(int itemId)
+		{
+			this.SpList.Value.GetItemById(itemId).Recycle();
+		}
+
 		private SPList GetList()
 		{
 			return this.Web.GetSPList(this.ListName, this.Template);

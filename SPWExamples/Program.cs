@@ -28,7 +28,7 @@ namespace SPW.Examples
 			using (var diContext = DI.Container.BeginLifetimeScope())
 			{
 				var service = diContext.Resolve<DynamicService>();
-				// service.CreateAndUpdateItem();
+				service.CreateAndUpdateItem();
 				// var items = service.QueryItems();
 				//		var typedService = container.Resolve<TypedService>();
 				//	typedService.LinqGetItem();

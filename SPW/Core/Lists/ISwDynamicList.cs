@@ -8,22 +8,30 @@
 	public interface ISwDynamicList
 	{
 		/// <summary>
-		///   Creates the specified item.
+		/// Creates the specified item.
 		/// </summary>
 		/// <param name="sItem">Item to create.</param>
-		/// <returns>Created item.</returns>
-		void InsertOnSubmit(SwItemData sItem);
-
+		/// <returns>Added SharePoint item</returns>
+		SwItemData Add(SwItemData sItem);
 
 		/// <summary>
-		///   Creates the specified item.
+		/// Creates the specified item.
 		/// </summary>
-		/// <param name="sItem">Item to create.</param>
-		/// <returns>Created item.</returns>
-		void UpdateOnSubmit(SwItemData sItem);
+		/// <param name="sItem">Item to update.</param>
+		/// <param name="props">Update properties.</param>
+		/// <returns>
+		/// Updated item.
+		/// </returns>
+		SwItemData Update(SwItemData sItem, UpdateProps props = null);
 
 		/// <summary>
-		///   Deletes item from list with specified identifier.
+		///   Recycles item with specified id.
+		/// </summary>
+		/// <param name="sItemId">ID of the item.</param>
+		void Recycle(int sItemId);
+
+		/// <summary>
+		///   Recycles item with specified id.
 		/// </summary>
 		/// <param name="sItemId">ID of the item.</param>
 		void Delete(int sItemId);
@@ -45,14 +53,12 @@
 		IEnumerable<SwItemData> GetItems(string camlQuery, string viewFields);
 
 		/// <summary>
-		///   Recycles item with specified id.
+		/// Doeses the user has permissions.
 		/// </summary>
-		/// <param name="sItemId">ID of the item.</param>
-		void Recycle(int sItemId);
-
-		/// <summary>
-		///  Iterates items in list.
-		/// </summary>
-		IEnumerable<SwItemData> Items { get; }
+		/// <param name="swItem">The sw item.</param>
+		/// <param name="permission">The permission.</param>
+		/// <param name="user">The user.</param>
+		/// <returns>True if has permissions.</returns>
+		bool DoesUserHasPermissions(SwItemData swItem, ListItemRights permission, ISwUser user = null);
 	}
 }

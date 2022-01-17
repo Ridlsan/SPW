@@ -14,10 +14,5 @@
 		/// <param name="url">Site root relative url.</param>
 		/// <returns>The ISwWeb.</returns>
 		ISwWeb GetWeb(string url, string login = null);
-
-		/// <summary>
-		/// Submits all unsaved items.
-		/// </summary>
-		void SubmitChanges();
 	}
 }
